@@ -7,32 +7,21 @@
 <title>มอนิเตอร์น้ำท่วม — ดอนเมือง &amp; สหประชาชื่น</title>
 <style>
   :root {
-    --bg: #0b1f33;
-    --card: #122a42;
-    --card2: #163552;
-    --text: #e8f1fa;
-    --muted: #9bb3c9;
-    --accent: #3ecf8e;
-    --warn: #ffb020;
-    --danger: #ff6b6b;
-    --link: #7ec8ff;
-    --border: rgba(255,255,255,.08);
+    --bg: #0b1f33; --card: #122a42; --card2: #163552; --text: #e8f1fa;
+    --muted: #9bb3c9; --accent: #3ecf8e; --warn: #ffb020; --danger: #ff6b6b;
+    --link: #7ec8ff; --border: rgba(255,255,255,.08);
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     font-family: "Sarabun", "Noto Sans Thai", system-ui, -apple-system, sans-serif;
     background: radial-gradient(1200px 600px at 10% -10%, #1a3a5c 0%, var(--bg) 55%);
-    color: var(--text);
-    line-height: 1.45;
-    min-height: 100vh;
+    color: var(--text); line-height: 1.45; min-height: 100vh;
   }
   header {
-    padding: 1.25rem 1.25rem .5rem;
-    position: sticky; top: 0; z-index: 10;
+    padding: 1.25rem 1.25rem .5rem; position: sticky; top: 0; z-index: 10;
     background: linear-gradient(180deg, rgba(11,31,51,.98), rgba(11,31,51,.85));
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
   }
   h1 { font-size: 1.25rem; margin: 0 0 .25rem; font-weight: 700; }
   .sub { color: var(--muted); font-size: .9rem; margin: 0; }
@@ -51,151 +40,145 @@
   a.card {
     display: block; text-decoration: none; color: inherit;
     background: linear-gradient(145deg, var(--card), var(--card2));
-    border: 1px solid var(--border);
-    border-radius: 14px; padding: .9rem 1rem;
+    border: 1px solid var(--border); border-radius: 14px; padding: .9rem 1rem;
     transition: transform .12s ease, border-color .12s;
   }
-  a.card:hover, a.card:focus {
-    transform: translateY(-1px);
-    border-color: rgba(126,200,255,.35);
-    outline: none;
-  }
-  a.card.urgent {
-    border-color: rgba(255,176,32,.45);
-    box-shadow: 0 0 0 1px rgba(255,176,32,.12);
-  }
-  .kicker {
-    font-size: .72rem; font-weight: 600; letter-spacing: .03em;
-    color: var(--warn); margin-bottom: .2rem;
-  }
-  a.card:not(.urgent) .kicker { color: var(--link); }
+  a.card:hover, a.card:focus { transform: translateY(-1px); border-color: rgba(126,200,255,.35); outline: none; }
+  a.card.urgent { border-color: rgba(255,176,32,.45); box-shadow: 0 0 0 1px rgba(255,176,32,.12); }
+  a.card.hot { border-color: rgba(255,107,107,.5); }
+  .kicker { font-size: .72rem; font-weight: 600; letter-spacing: .03em; color: var(--warn); margin-bottom: .2rem; }
+  a.card:not(.urgent):not(.hot) .kicker { color: var(--link); }
   .title { font-size: 1.02rem; font-weight: 650; margin: 0 0 .2rem; }
   .note { font-size: .82rem; color: var(--muted); margin: 0; }
   .chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .55rem; }
-  .chip {
-    font-size: .7rem; padding: .15rem .45rem; border-radius: 6px;
-    background: rgba(255,255,255,.06); color: var(--muted);
-  }
+  .chip { font-size: .7rem; padding: .15rem .45rem; border-radius: 6px; background: rgba(255,255,255,.06); color: var(--muted); }
   .chip.green { background: rgba(62,207,142,.15); color: var(--accent); }
+  .chip.red { background: rgba(255,107,107,.18); color: #ff9b9b; }
   .chip.blue { background: rgba(126,200,255,.12); color: var(--link); }
-  .list {
+  .gauge {
     background: var(--card); border: 1px solid var(--border);
-    border-radius: 14px; padding: .7rem 1rem; margin: 0;
+    border-radius: 14px; padding: .75rem 1rem; margin-bottom: .55rem;
   }
-  .list li { margin: .35rem 0; color: var(--text); font-size: .92rem; }
-  footer {
-    margin-top: 1.75rem; padding-top: 1rem;
-    border-top: 1px solid var(--border);
-    color: var(--muted); font-size: .78rem;
-  }
+  .gauge .row { display: flex; justify-content: space-between; gap: .75rem; align-items: baseline; }
+  .gauge .name { font-weight: 600; font-size: .95rem; }
+  .gauge .cm { font-weight: 700; white-space: nowrap; }
+  .gauge .cm.bad { color: var(--danger); }
+  .gauge .cm.warn { color: var(--warn); }
+  .gauge .cm.ok { color: var(--accent); }
+  .gauge .meta { font-size: .78rem; color: var(--muted); margin-top: .2rem; }
   .warn-box {
-    background: rgba(255,107,107,.1);
-    border: 1px solid rgba(255,107,107,.3);
-    border-radius: 12px; padding: .75rem 1rem;
-    font-size: .85rem; color: #ffc9c9; margin-bottom: .5rem;
+    background: rgba(255,107,107,.1); border: 1px solid rgba(255,107,107,.3);
+    border-radius: 12px; padding: .75rem 1rem; font-size: .85rem; color: #ffc9c9; margin-bottom: .5rem;
   }
+  footer { margin-top: 1.75rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .78rem; }
 </style>
 </head>
 <body>
 <header>
   <h1>🌊 มอนิเตอร์น้ำท่วมกรุงเทพ</h1>
   <p class="sub">ถนนรอบดอนเมือง + ย่านโรงเบียร์สหประชาชื่น (จตุจักร)</p>
-  <span class="badge">อัปเดต 26 ก.ย. 2026 · กล้องถนนสาธารณะเท่านั้น</span>
+  <span class="badge">อัปเดต 26 ก.ย. 2026 ~19:50 · 31 แหล่งสาธารณะ</span>
 </header>
 <main>
-  <div class="warn-box">ไม่รวมกล้องในสนามบิน / ความปลอดภัยสนามบิน — ใช้เฉพาะหน้าเว็บหน่วยงานสาธารณะ</div>
+  <div class="warn-box">ไม่รวมกล้องในสนามบิน · ใช้เฉพาะหน้าเว็บ/แอปหน่วยงานสาธารณะ<br/>ตัวเลขระดับน้ำด้านล่างเป็นสแนปช็อต ~19:45 น. — กดลิงก์ กทม. เพื่อดูสด</div>
+
+  <h2>สถานการณ์ใกล้โรงเบียร์สหประชาชื่น (สแนปช็อต)</h2>
+  <div class="gauge">
+    <div class="row"><span class="name">งามวงศ์วาน แยกพงษ์เพชร</span><span class="cm bad">~55 ซม.</span></div>
+    <div class="meta">FL.LSI.02 · น้ำท่วม</div>
+  </div>
+  <div class="gauge">
+    <div class="row"><span class="name">งามวงศ์วาน ซ.ชินเขต</span><span class="cm bad">~43 ซม.</span></div>
+    <div class="meta">FL.LSI.06 · น้ำท่วม</div>
+  </div>
+  <div class="gauge">
+    <div class="row"><span class="name">รัชดา–ลาดพร้าว (ธ.กรุงเทพ)</span><span class="cm bad">~41 ซม.</span></div>
+    <div class="meta">FL.CTC.01 · จตุจักร</div>
+  </div>
+  <div class="gauge">
+    <div class="row"><span class="name">เทศบาลสงเคราะห์ (ตลาด)</span><span class="cm warn">~16 ซม.</span></div>
+    <div class="meta">FL.CTC.04 · ใกล้แนวเทศบาล/ลาดยาวที่สุดในรายการที่ยืนยัน</div>
+  </div>
+  <div class="gauge">
+    <div class="row"><span class="name">งามวงศ์วาน แยกเกษตร</span><span class="cm warn">~9 ซม.</span></div>
+    <div class="meta">FL.CTC.06 · น้ำท่วมเล็กน้อย</div>
+  </div>
 
   <h2>เปิดด่วน — น้ำท่วม</h2>
   <div class="grid">
-    <a class="card urgent" href="https://weather.bangkok.go.th/Flood/" target="_blank" rel="noopener">
+    <a class="card hot" href="https://weather.bangkok.go.th/Flood/" target="_blank" rel="noopener">
       <div class="kicker">กทม. · ระดับน้ำบนถนน</div>
-      <p class="title">สถานีวัดน้ำถนน 108+ จุด</p>
-      <p class="note">กรองเขตจตุจักร / บางซื่อ / ดอนเมือง ได้ในหน้านี้</p>
-      <div class="chips"><span class="chip green">แนะนำ</span><span class="chip">waterlevel</span></div>
+      <p class="title">สถานีวัดน้ำถนน (ตารางเรียลไทม์)</p>
+      <p class="note">ค้นรหัส FL.DMG / FL.CTC / FL.LSI ในหน้านี้</p>
+      <div class="chips"><span class="chip red">สด</span><span class="chip green">แนะนำ</span></div>
+    </a>
+    <a class="card urgent" href="https://floodbangkok.bangkok.go.th/" target="_blank" rel="noopener">
+      <div class="kicker">กทม. · ใหม่</div>
+      <p class="title">ระบบตรวจวัดน้ำท่วมถนน (แผนที่)</p>
+      <p class="note">floodbangkok.bangkok.go.th</p>
+      <div class="chips"><span class="chip green">แนะนำ</span></div>
     </a>
     <a class="card urgent" href="https://bmawaterflow.bangkok.go.th/" target="_blank" rel="noopener">
       <div class="kicker">กทม. · คลอง</div>
       <p class="title">อัตราการไหล / ระดับน้ำคลอง</p>
-      <p class="note">ดูแนวโน้มน้ำคลองรอบเมือง</p>
-      <div class="chips"><span class="chip green">แนะนำ</span><span class="chip">waterlevel</span></div>
+      <p class="note">บริบทน้ำระบาย ไม่ใช่กล้องถนน</p>
     </a>
     <a class="card urgent" href="https://cpudapp.bangkok.go.th/bmatraffic/" target="_blank" rel="noopener">
       <div class="kicker">กทม. · CCTV</div>
       <p class="title">แผนที่กล้องจราจร กทม.</p>
-      <p class="note">ซูมย่านวิภาวดี–ดอนเมือง หรือจตุจักร–ประชาชื่น แล้วแตะหมุดกล้อง</p>
+      <p class="note">ซูมวิภาวดี–ดอนเมือง หรือจตุจักร–ประชาชื่น–งามวงศ์วาน</p>
       <div class="chips"><span class="chip green">แนะนำ</span><span class="chip">CCTV</span></div>
-    </a>
-    <a class="card" href="http://www.bmatraffic.com/index.aspx" target="_blank" rel="noopener">
-      <div class="kicker">กระจกเก่า</div>
-      <p class="title">bmatraffic.com</p>
-      <p class="note">เวอร์ชันเก่าที่ยังถูกอ้างบ่อย — ใช้ถ้าลิงก์ใหม่ช้า</p>
     </a>
     <a class="card" href="https://live.iticfoundation.org/" target="_blank" rel="noopener">
       <div class="kicker">iTIC</div>
       <p class="title">iTIC live — จราจร + CCTV</p>
-      <p class="note">มูลนิธิศูนย์ข้อมูลจราจรอัจฉริยะไทย</p>
+      <p class="note">ฟ้า = snapshot · แดง = สตรีม</p>
       <div class="chips"><span class="chip blue">aggregator</span></div>
     </a>
-    <a class="card" href="https://disaster.gistda.or.th/flood" target="_blank" rel="noopener">
-      <div class="kicker">GISTDA</div>
-      <p class="title">แผนที่น้ำท่วมดาวเทียม</p>
-      <p class="note">ภาพรวมพื้นที่น้ำท่วมระดับประเทศ</p>
-    </a>
-    <a class="card" href="http://water.rid.go.th/hyd/Report/cctv.html" target="_blank" rel="noopener">
-      <div class="kicker">กรมชลประทาน</div>
-      <p class="title">CCTV ระดับน้ำ RID</p>
-      <p class="note">ลุ่มน้ำ / ประตูน้ำ (ไม่ใช่ถนนเมือง)</p>
+    <a class="card" href="https://traffic.longdo.com/" target="_blank" rel="noopener">
+      <div class="kicker">Longdo</div>
+      <p class="title">Longdo Traffic</p>
+      <p class="note">แผนที่จราจร (ฟีดเกี่ยวข้องกับ iTIC)</p>
     </a>
   </div>
 
   <h2>รอบดอนเมือง (ถนนเท่านั้น)</h2>
   <div class="grid">
-    <a class="card urgent" href="https://www.highwaytraffic.go.th/DOHMobile/Modules/CCTV2.aspx" target="_blank" rel="noopener">
+    <a class="card" href="https://www.highwaytraffic.go.th/DOHMobile/Modules/CCTV2.aspx" target="_blank" rel="noopener">
       <div class="kicker">กรมทางหลวง</div>
-      <p class="title">เลือกกล้อง DOH CCTV</p>
-      <p class="note">วิภาวดีรังสิต ดอนเมือง · ตลาดใหม่ดอนเมือง · แจ้งวัฒนะ ฯลฯ</p>
-      <div class="chips"><span class="chip green">ถนน</span><span class="chip">DOH</span></div>
+      <p class="title">DOH CCTV — เลือกกล้อง</p>
+      <p class="note">ยืนยันในรายการ: ถ.วิภาวดีรังสิต ดอนเมือง · ถ.แจ้งวัฒนะ (ภาพอาจ stale)</p>
     </a>
-    <a class="card" href="https://highwaytraffic.go.th/DOHWeb/Home.aspx" target="_blank" rel="noopener">
-      <div class="kicker">กรมทางหลวง</div>
-      <p class="title">แผนที่หลัก highwaytraffic</p>
-      <p class="note">หน้าเว็บเต็มของระบบ</p>
+    <a class="card" href="https://play.google.com/store/apps/details?id=com.amrasia.app.bma" target="_blank" rel="noopener">
+      <div class="kicker">แอป กทม.</div>
+      <p class="title">BMA Traffic (Android)</p>
+      <p class="note">สำรองเมื่อเว็บ cpudapp ติด 403</p>
+    </a>
+    <a class="card" href="https://apps.apple.com/th/app/bma-traffic/id902870134" target="_blank" rel="noopener">
+      <div class="kicker">แอป กทม.</div>
+      <p class="title">BMA Traffic (iOS)</p>
     </a>
     <a class="card" href="https://play.google.com/store/apps/details?id=isymphonyz.exat" target="_blank" rel="noopener">
       <div class="kicker">ทางด่วน EXAT</div>
       <p class="title">แอป EXAT Traffic</p>
-      <p class="note">แตะไอคอน CCTV บนแผนที่ทางด่วนใกล้วิภาวดี–ดอนเมือง</p>
+      <p class="note">CCTV ทางพิเศษ — มีเฉพาะในแอป</p>
     </a>
   </div>
 
-  <h2>ชื่อกล้อง DOH ที่เกี่ยวกับย่านนี้</h2>
-  <ul class="list">
-    <li>ถ.วิภาวดีรังสิต ดอนเมือง</li>
-    <li>ตลาดใหม่ดอนเมือง</li>
-    <li>ตรงข้ามคลังสินค้า / ก่อนถึง รพ.วิภาวดี</li>
-    <li>เดลินิวส์</li>
-    <li>ถ.แจ้งวัฒนะ</li>
-    <li>ถ.ลำลูกกา กม.9</li>
-  </ul>
-
-  <h2>รอบโรงเบียร์สหประชาชื่น</h2>
-  <p class="note" style="margin:.2rem 0 0.8rem">109 ซอยเทศบาลนิมิตใต้ 1 ลาดยาว จตุจักร — ไม่มีสตรีมกล้องร้านสาธารณะ</p>
-  <div class="grid">
-    <a class="card" href="https://cpudapp.bangkok.go.th/bmatraffic/" target="_blank" rel="noopener">
-      <div class="kicker">วิธีดู</div>
-      <p class="title">ซูม BMA Traffic → จตุจักร / ประชาชื่น / นิมิตใต้</p>
-      <p class="note">แตะหมุดกล้องถนนใกล้เคียง</p>
-    </a>
-    <a class="card" href="https://weather.bangkok.go.th/Flood/" target="_blank" rel="noopener">
-      <div class="kicker">ระดับน้ำ</div>
-      <p class="title">กรองสถานีเขตจตุจักร / บางซื่อ</p>
-      <p class="note">ช่วงน้ำท่วมข่าวเคยระบุกำแพงเพชร 2 (บางซื่อ–จตุจักร) เป็นเส้นทางส้ม</p>
-    </a>
+  <h2>จุดวัดน้ำย่านดอนเมือง (สแนปช็อต)</h2>
+  <div class="gauge">
+    <div class="row"><span class="name">วิภาวดีขาออก (กำแพงเพชร 6)</span><span class="cm warn">ขัดข้อง</span></div>
+    <div class="meta">FL.DMG.01</div>
+  </div>
+  <div class="gauge">
+    <div class="row"><span class="name">ช่างอากาศอุทิศ ซ.7 / ซ.15</span><span class="cm warn">ขัดข้อง</span></div>
+    <div class="meta">FL.DMG.02 · FL.DMG.03</div>
   </div>
 
   <footer>
-    หน้าที่นี้รวบรวมลิงก์หน่วยงานสาธารณะเพื่อมอนิเตอร์น้ำท่วม · ไม่เจาะกล้องในสนามบิน<br/>
-    Oracle · Grok Bot · ค้นหาต่อเนื่องถึงพรุ่งนี้อัตโนมัติ
+    31 แหล่งสาธารณะ · ไม่เจาะกล้องในสนามบิน<br/>
+    หน้าเว็บ: https://nazt.github.io/flood-cctv-monitor/<br/>
+    Oracle · ค้นหาต่อเนื่องถึงพรุ่งนี้ · ตัวเลขระดับน้ำเป็นสแนปช็อต ไม่ใช่สดตลอด
   </footer>
 </main>
 </body>
